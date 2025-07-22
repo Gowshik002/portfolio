@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gowshik Ram S - DevOps Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .glass-effect {
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(45, 212, 191, 0.1);
+        }
+        .highlight-text {
+            color: #64ffda;
+        }
+        .section-title {
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ccd6f6;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            position: relative;
+            top: 2px;
+            width: 200px;
+            height: 1px;
+            margin-left: 20px;
+            background-color: #233554;
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tag {
+            display: inline-block;
+            background-color: #164e63;
+            color: #64ffda;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        /* Staggered animation for hero section */
+        #hero > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Flip card animation for skills */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: #112240; /* A slightly lighter shade of the background */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start; /* Align content to the top */
+            align-items: flex-start; /* Align content to the left */
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed">
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Header -->
+    <header id="header" class="glass-effect fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold highlight-text">GRS</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="hover:text-highlight-text transition-colors duration-300">About</a>
+                <a href="#skills" class="hover:text-highlight-text transition-colors duration-300">Skills</a>
+                <a href="#experience" class="hover:text-highlight-text transition-colors duration-300">Experience</a>
+                <a href="#projects" class="hover:text-highlight-text transition-colors duration-300">Projects</a>
+                <a href="#contact" class="hover:text-highlight-text transition-colors duration-300">Contact</a>
+            </div>
+            <a href="mailto:gowshikram002@gmail.com" class="hidden md:block border border-highlight-text text-highlight-text px-4 py-2 rounded-md hover:bg-highlight-text hover:text-slate-900 transition-all duration-300">
+                Get In Touch
+            </a>
+            <button id="mobile-menu-button" class="md:hidden">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 hover:text-highlight-text">About</a>
+            <a href="#skills" class="block py-2 hover:text-highlight-text">Skills</a>
+            <a href="#experience" class="block py-2 hover:text-highlight-text">Experience</a>
+            <a href="#projects" class="block py-2 hover:text-highlight-text">Projects</a>
+            <a href="#contact" class="block py-2 hover:text-highlight-text">Contact</a>
+             <a href="mailto:gowshikram002@gmail.com" class="mt-4 inline-block border border-highlight-text text-highlight-text px-4 py-2 rounded-md hover:bg-highlight-text hover:text-slate-900 transition-all duration-300">
+                Get In Touch
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 md:px-16 lg:px-24 pt-24 md:pt-32">
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-[75vh] flex flex-col justify-center">
+            <p class="text-lg text-highlight-text mb-4">Hi, my name is</p>
+            <h1 class="text-4xl md:text-7xl font-bold text-slate-100">Gowshik Ram S.</h1>
+            <h2 class="text-4xl md:text-6xl font-bold text-slate-400 mt-2">I build and automate for the cloud.</h2>
+            <p class="mt-6 max-w-xl text-slate-400">
+                I'm a DevOps Engineer specializing in building robust CI/CD pipelines, managing scalable cloud infrastructure, and automating deployments. I thrive on solving complex problems and ensuring system reliability.
+            </p>
+            <div class="mt-8 flex space-x-4">
+                <a href="https://github.com/Gowshik002" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-highlight-text transition-transform duration-300 hover:scale-110"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="https://www.linkedin.com/in/gowshik-ram-b1a5991b0" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-highlight-text transition-transform duration-300 hover:scale-110"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                <a href="mailto:gowshikram002@gmail.com" class="text-slate-400 hover:text-highlight-text transition-transform duration-300 hover:scale-110"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                <a href="tel:+919659933013" class="text-slate-400 hover:text-highlight-text transition-transform duration-300 hover:scale-110"><i data-lucide="phone" class="w-6 h-6"></i></a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 scroll-reveal">
+            <h2 class="section-title">About Me</h2>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10">
+                <div class="md:col-span-3 text-slate-400 space-y-4">
+                    <p>
+                        As a DevOps Engineer, I have hands-on experience in building CI/CD pipelines, managing scalable cloud infrastructure, and automating deployments using industry-standard tools like Jenkins, Docker, and AWS. I am a strong problem-solver with expertise in system monitoring and production issue resolution.
+                    </p>
+                    <p>
+                        I enjoy bridging the gap between development and operations, creating seamless workflows that improve efficiency and reliability. My goal is to leverage my skills to build resilient systems that can scale effortlessly.
+                    </p>
+                </div>
+                 <div class="md:col-span-2 flex items-center justify-center">
+                    <div class="w-64 h-64 rounded-lg relative group card-hover">
+                        <div class="absolute inset-0 bg-highlight-text rounded-lg transform transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                        <img src="http://googleusercontent.com/file_content/1" alt="Gowshik Ram S" class="rounded-lg w-full h-full object-cover relative z-10 border-2 border-slate-700" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a192f/ccd6f6?text=Profile+Image';">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 scroll-reveal">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Skill 1 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i data-lucide="code-2" class="w-12 h-12 text-highlight-text mb-4"></i>
+                            <h3 class="font-bold text-lg text-slate-100">Languages & Scripting</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Languages & Scripting</h3>
+                            <ul class="text-slate-400 space-y-2 text-left w-full">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Python</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Bash</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skill 2 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i data-lucide="box" class="w-12 h-12 text-highlight-text mb-4"></i>
+                            <h3 class="font-bold text-lg text-slate-100">Containerization & Orchestration</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Containerization & Orchestration</h3>
+                            <ul class="text-slate-400 space-y-2 text-left w-full">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Docker</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Kubernetes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skill 3 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i data-lucide="git-branch-plus" class="w-12 h-12 text-highlight-text mb-4"></i>
+                            <h3 class="font-bold text-lg text-slate-100">CI/CD & Automation</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">CI/CD & Automation</h3>
+                            <ul class="text-slate-400 space-y-2 text-left w-full">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Jenkins</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Git</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Maven</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skill 4 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i data-lucide="cloud" class="w-12 h-12 text-highlight-text mb-4"></i>
+                            <h3 class="font-bold text-lg text-slate-100">Cloud Platforms</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Cloud Platforms</h3>
+                            <ul class="text-slate-400 space-y-2 text-left w-full">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>AWS (EC2, S3, IAM)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skill 5 -->
+                 <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i data-lucide="area-chart" class="w-12 h-12 text-highlight-text mb-4"></i>
+                            <h3 class="font-bold text-lg text-slate-100">Monitoring & Observability</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Monitoring & Observability</h3>
+                            <ul class="text-slate-400 space-y-2 text-left w-full">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Prometheus</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Grafana</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>CloudWatch</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skill 6 -->
+                 <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i data-lucide="database" class="w-12 h-12 text-highlight-text mb-4"></i>
+                            <h3 class="font-bold text-lg text-slate-100">Databases & Tools</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Databases & Tools</h3>
+                            <ul class="text-slate-400 space-y-2 text-left w-full">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>PostgreSQL</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>MongoDB</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>JIRA</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Postman</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 scroll-reveal">
+            <h2 class="section-title">Where I've Worked</h2>
+            <div class="max-w-3xl">
+                <div class="p-6 rounded-lg bg-slate-800/50 shadow-lg card-hover">
+                    <h3 class="text-xl font-semibold text-slate-100">DevOps Engineer & L3 Support</h3>
+                    <p class="text-md text-highlight-text mb-2">Enhancesys Innovations Private Limited</p>
+                    <p class="text-sm text-slate-400 mb-4">Aug 2024 – Jun 2025</p>
+                    <ul class="space-y-3 text-slate-400">
+                        <li class="flex"><i data-lucide="arrow-right-circle" class="w-5 h-5 text-highlight-text mr-3 mt-1 flex-shrink-0"></i>Designed and implemented CI/CD pipelines using Jenkins, reducing deployment time by 40%.</li>
+                        <li class="flex"><i data-lucide="arrow-right-circle" class="w-5 h-5 text-highlight-text mr-3 mt-1 flex-shrink-0"></i>Monitored application and server health using Prometheus and Grafana.</li>
+                        <li class="flex"><i data-lucide="arrow-right-circle" class="w-5 h-5 text-highlight-text mr-3 mt-1 flex-shrink-0"></i>Managed load balancing, disk utilization, and automated server-side scripts for enhanced performance.</li>
+                        <li class="flex"><i data-lucide="arrow-right-circle" class="w-5 h-5 text-highlight-text mr-3 mt-1 flex-shrink-0"></i>Containerized applications using Docker for scalability and portability.</li>
+                         <li class="flex"><i data-lucide="arrow-right-circle" class="w-5 h-5 text-highlight-text mr-3 mt-1 flex-shrink-0"></i>Led a team in performing root cause analysis and implemented permanent fixes to recurring issues.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 scroll-reveal">
+            <h2 class="section-title">Things I've Built</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <div class="bg-slate-800/50 rounded-lg p-6 flex flex-col justify-between shadow-lg card-hover">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i data-lucide="folder-git-2" class="w-10 h-10 text-highlight-text"></i>
+                            <a href="https://github.com/Gowshik002" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-highlight-text"><i data-lucide="github" class="w-6 h-6"></i></a>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-100 mb-2">Smartfren – SIM Network Management System</h3>
+                        <p class="text-sm text-slate-400">Maintained a full-stack mobile and web-based SIM card management application, reducing deployment errors by 60% and improving release frequency.</p>
+                    </div>
+                    <div class="mt-4">
+                        <span class="tag">Jenkins</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Java</span><span class="tag">MongoDB</span>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="bg-slate-800/50 rounded-lg p-6 flex flex-col justify-between shadow-lg card-hover">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i data-lucide="folder-git-2" class="w-10 h-10 text-highlight-text"></i>
+                            <a href="https://github.com/Gowshik002" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-highlight-text"><i data-lucide="github" class="w-6 h-6"></i></a>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-100 mb-2">Automated Server Health Monitoring Script</h3>
+                        <p class="text-sm text-slate-400">Built a Python script to monitor server metrics (CPU, memory, disk) across EC2 instances. Reduced manual monitoring by 80% and improved incident response time.</p>
+                    </div>
+                    <div class="mt-4">
+                        <span class="tag">Python</span><span class="tag">Bash</span><span class="tag">AWS EC2</span><span class="tag">CloudWatch</span><span class="tag">Cron</span>
+                    </div>
+                </div>
+                 <!-- Project 3 (Certifications as a project card) -->
+                <div class="bg-slate-800/50 rounded-lg p-6 flex flex-col justify-between shadow-lg card-hover">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i data-lucide="award" class="w-10 h-10 text-highlight-text"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-100 mb-2">Certifications & Learning</h3>
+                         <ul class="text-sm text-slate-400 space-y-2 mt-2">
+                           <li>Programming for Everybody (Python) – Coursera</li>
+                           <li>Python Data Structures – Coursera</li>
+                           <li>Data Scientist Intern – Netzwerk</li>
+                         </ul>
+                    </div>
+                    <div class="mt-4">
+                        <span class="tag">Python</span><span class="tag">Data Science</span><span class="tag">Coursera</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education" class="py-24 scroll-reveal">
+            <h2 class="section-title">Education</h2>
+            <div class="max-w-3xl space-y-4">
+                <div class="p-4 rounded-lg bg-slate-800/50 card-hover">
+                    <h3 class="font-semibold text-slate-100">B.E – Electronics and Communication Engineering</h3>
+                    <p class="text-sm text-slate-400">RMD Engineering College | Graduated: 2023</p>
+                </div>
+                <div class="p-4 rounded-lg bg-slate-800/50 card-hover">
+                    <h3 class="font-semibold text-slate-100">Higher Secondary Education</h3>
+                    <p class="text-sm text-slate-400">Maharishi International Residential School | Graduated: 2019</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 text-center scroll-reveal">
+            <h2 class="text-2xl font-semibold text-highlight-text">What's Next?</h2>
+            <h3 class="text-4xl md:text-5xl font-bold text-slate-100 mt-4">Get In Touch</h3>
+            <p class="mt-6 max-w-xl mx-auto text-slate-400">
+                I'm always open to discussing new opportunities and challenges in the world of DevOps and cloud computing. Whether you have a question or just want to say hi, my inbox is always open.
+            </p>
+            <a href="mailto:gowshikram002@gmail.com" class="mt-10 inline-block text-lg border border-highlight-text text-highlight-text px-8 py-4 rounded-md hover:bg-highlight-text hover:text-slate-900 transition-all duration-300">
+                Say Hello
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-slate-400 text-sm">
+        <div class="flex justify-center space-x-6 mb-4 md:hidden">
+            <a href="https://github.com/Gowshik002" target="_blank" rel="noopener noreferrer" class="hover:text-highlight-text"><i data-lucide="github" class="w-6 h-6"></i></a>
+            <a href="https://www.linkedin.com/in/gowshik-ram-b1a5991b0" target="_blank" rel="noopener noreferrer" class="hover:text-highlight-text"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+            <a href="mailto:gowshikram002@gmail.com" class="hover:text-highlight-text"><i data-lucide="mail" class="w-6 h-6"></i></a>
+            <a href="tel:+919659933013" class="hover:text-highlight-text"><i data-lucide="phone" class="w-6 h-6"></i></a>
+        </div>
+        <p>Designed & Built by Gowshik Ram S.</p>
+        <p>Tiruvallur, Tamil Nadu, India</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a, .container a[href^="#"]').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Header shadow on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+
+        // Scroll Reveal Animation
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        scrollRevealElements.forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Staggered Hero Animation
+        window.addEventListener('load', () => {
+            const heroElements = document.querySelectorAll('#hero > *');
+            heroElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, (index + 1) * 150);
+            });
+        });
+
+        // Particle background animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = '#52658c';
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                this.x += this.speedX;
+                this.y += this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+    </script>
+</body>
+</html>
