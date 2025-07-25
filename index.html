@@ -114,6 +114,13 @@
             justify-content: flex-start; /* Align content to the top */
             align-items: flex-start; /* Align content to the left */
         }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 <body class="antialiased leading-relaxed">
@@ -183,8 +190,9 @@
                  <div class="md:col-span-2 flex items-center justify-center">
                     <div class="w-64 h-64 rounded-lg relative group card-hover">
                         <div class="absolute inset-0 bg-highlight-text rounded-lg transform transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
-                        <img src="profile-photo.png" alt="Gowshik Ram S" class="rounded-lg w-full h-full object-cover relative z-10 border-2 border-slate-700" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a192f/ccd6f6?text=Profile+Image';">
+                        <img src="http://googleusercontent.com/file_content/1" alt="Gowshik Ram S" class="rounded-lg w-full h-full object-cover relative z-10 border-2 border-slate-700" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0a192f/ccd6f6?text=Profile+Image';">
                 </div>
+            </div>
             </div>
         </section>
         
@@ -245,13 +253,15 @@
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <i data-lucide="cloud" class="w-12 h-12 text-highlight-text mb-4"></i>
-                            <h3 class="font-bold text-lg text-slate-100">Cloud Platforms</h3>
+                            <i data-lucide="cloudy" class="w-12 h-12 text-highlight-text mb-4"></i>
+                            <h3 class="font-bold text-lg text-slate-100">Cloud & Networking</h3>
                         </div>
                         <div class="flip-card-back">
-                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Cloud Platforms</h3>
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Cloud & Networking</h3>
                             <ul class="text-slate-400 space-y-2 text-left w-full">
                                 <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>AWS (EC2, S3, IAM)</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>TCP/IP, DNS, HTTP/S</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Routing & Firewalls</li>
                             </ul>
                         </div>
                     </div>
@@ -261,14 +271,15 @@
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i data-lucide="area-chart" class="w-12 h-12 text-highlight-text mb-4"></i>
-                            <h3 class="font-bold text-lg text-slate-100">Monitoring & Observability</h3>
+                            <h3 class="font-bold text-lg text-slate-100">Monitoring & Databases</h3>
                         </div>
                         <div class="flip-card-back">
-                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Monitoring & Observability</h3>
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Monitoring & Databases</h3>
                             <ul class="text-slate-400 space-y-2 text-left w-full">
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Prometheus</li>
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Grafana</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Prometheus & Grafana</li>
                                 <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>CloudWatch</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>PostgreSQL</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>MongoDB</li>
                             </ul>
                         </div>
                     </div>
@@ -277,16 +288,15 @@
                  <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <i data-lucide="database" class="w-12 h-12 text-highlight-text mb-4"></i>
-                            <h3 class="font-bold text-lg text-slate-100">Databases & Tools</h3>
+                            <i data-lucide="wrench" class="w-12 h-12 text-highlight-text mb-4"></i>
+                            <h3 class="font-bold text-lg text-slate-100">Other Skills & Tools</h3>
                         </div>
                         <div class="flip-card-back">
-                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Databases & Tools</h3>
+                            <h3 class="font-bold text-lg text-slate-100 mb-3 w-full">Other Skills & Tools</h3>
                             <ul class="text-slate-400 space-y-2 text-left w-full">
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>PostgreSQL</li>
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>MongoDB</li>
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>JIRA</li>
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Postman</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Excel & Data Analysis</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>Logical Reasoning</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-4 h-4 text-highlight-text mr-2"></i>JIRA & Postman</li>
                             </ul>
                         </div>
                     </div>
